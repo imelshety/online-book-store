@@ -5,12 +5,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { lightTheme, darkTheme } from './theme';
 import Switch from '@mui/material/Switch';
 import { FormControlLabel } from '@mui/material';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import AuthLayout from './Layout/AuthLayout';
 import MasterLayout from './Layout/MasterLayout';
 import Home from './pages/Ui/Home';
+import { ToastContainer } from 'react-toastify';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -91,6 +93,7 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
        <RouterProvider router={routers} />
+       <ToastContainer />
       <CssBaseline />
      
         <FormControlLabel

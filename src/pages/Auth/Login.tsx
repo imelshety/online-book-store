@@ -1,25 +1,50 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { FormControl, InputLabel, InputAdornment, OutlinedInput, IconButton, Stack, Typography, Button, FormHelperText, Checkbox, FormControlLabel } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller , SubmitHandler} from 'react-hook-form';
 import logoImage from '/assets/Logo.png';
+import axios from 'axios';
+import {  Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { BASE_URL } from '../../services/Api';
 
+type Inputs = {
+  email:string ;
+  password: string;
+};
 const Login = () => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
 
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    // Handle form submission logic here
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const response = await axios.post(`${BASE_URL}/api/auth/login`, data);
+      console.log('Response:', response.data);
+  
+      const profile = response.data?.data.profile;
+      if (profile && profile.first_name) {
+        toast.success(`Welcome Back ${profile.first_name} ${profile.last_name}`);
+        console.log('Profile:', profile);
+        navigate("/home");
+      } else {
+        toast.error('Login failed: Invalid response');
+        console.log('Invalid profile:', profile);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      toast.error('Failed to sign in');
+    }
   };
-
+  
+  
   return (
     <Stack
       width="100%"
@@ -87,6 +112,10 @@ const Login = () => {
                   paddingInline: 2,
                   paddingTop: 1,
                   backgroundColor: '#F4F4FF',
+                  '&::placeholder': {
+                     // Placeholder color
+                    opacity: 1,
+                  }
                 }}
                 endAdornment={
                   <InputAdornment position="end">
@@ -149,11 +178,11 @@ const Login = () => {
             },
           }}
         >
-          Register
+          <Link to='/signup'>Register</Link>
         </Button>
       </form>
     </Stack>
   );
 };
 
-export default Login;
+export default Login; 
