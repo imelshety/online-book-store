@@ -20,7 +20,7 @@ export const lightTheme = createTheme({
     },
     body1 :{
         color: '#09093799', // Default color for p
-    }
+    },
   },
 });
 
@@ -42,5 +42,8 @@ export const darkTheme = createTheme({
     h2: {
       color: '#EF6B4A', // Color for h2 in dark mode
     },
+    body1 :{
+      color: '#EF6B4A', // Default color for p
+  }
   },
 });

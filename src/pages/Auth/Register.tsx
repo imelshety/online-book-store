@@ -2,33 +2,53 @@ import { useState } from 'react';
 import { FormControl, InputLabel, InputAdornment, OutlinedInput, IconButton, Stack, Typography, Button, FormHelperText, MenuItem, Select } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import logoImage from '/assets/Logo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../../services/Api';
+import axios from 'axios';
+
 type Inputs = {
-  firstName : string,
-  lastName : string,
-  email:string ;
-  password: string;
-  role : []
+  firstName: string,
+  lastName: string,
+  email: string,
+  password: string,
+  role: string, // changed from array to string
 };
+const token ='https://upskilling-egypt.com:3007/api/auth/refresh-tokens?refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjQ1MzA1MGY5OTMxN2NiZGZlOWI2NWEiLCJlbWFpbCI6ImFiZGVscmhtYW5mYXJnaGFseTE5OThAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzE1ODExMjkzLCJleHAiOjE3MTY0MTYwOTN9.dnByiOwZWWggwAVRd9DUsez7UjJrgBr_PK-YHc6Qoi'
 const Register = () => {
   const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
-
+  const navigate = useNavigate();
   const { control, handleSubmit, formState: { errors } } = useForm<Inputs>();
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    // Handle form submission logic here
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/auth/register`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+          },
+        }
+      );
+      
+      console.log(response);
+      navigate("/signin");
+    } catch (error) {
+      console.error('Registration error:', error);
+    }
   };
 
   return (
     <Stack
+    paddingTop={12}
       width="100%"
       height="100%"
       direction="column"

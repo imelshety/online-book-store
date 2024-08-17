@@ -47,6 +47,7 @@ const Login = () => {
   
   return (
     <Stack
+    paddingTop={12}
       width="100%"
       height="100%"
       direction="column"
@@ -82,7 +83,6 @@ const Login = () => {
                   borderColor: errors.email ? 'red' : '#6251DD',
                   paddingInline: 2,
                   paddingTop: 1,
-                  backgroundColor: '#F4F4FF',
                 }}
                 label="Email address"
               />
@@ -112,10 +112,6 @@ const Login = () => {
                   paddingInline: 2,
                   paddingTop: 1,
                   backgroundColor: '#F4F4FF',
-                  '&::placeholder': {
-                     // Placeholder color
-                    opacity: 1,
-                  }
                 }}
                 endAdornment={
                   <InputAdornment position="end">
