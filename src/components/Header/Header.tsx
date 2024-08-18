@@ -30,7 +30,7 @@ const Header: HeaderComponent = ({ children }) => {
       {/* Desktop Header */}
       <header
         style={{ backgroundColor: headerBgColor }}
-        className={`w-full hidden lg:flex fixed left-0 right-0 top-0 z-50 mb-8 justify-between items-center flex-wrap gap-4 ${
+        className={`w-full hidden lg:flex fixed left-0 right-0 top-0 z-50 mb-8 justify-between items-center flex-wrap gap-4 shadow-lg ${
           active ? "hidden" : ""
         }`}
       >

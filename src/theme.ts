@@ -39,6 +39,9 @@ export const darkTheme = createTheme({
     },
   },
   typography: {
+    h1: {
+      color: '#ED553B', // Color for h1 in dark mode
+    },
     h2: {
       color: '#EF6B4A', // Color for h2 in dark mode
     },
