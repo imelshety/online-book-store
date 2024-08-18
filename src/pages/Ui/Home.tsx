@@ -108,7 +108,7 @@ const Home: FC = () => {
         <span className="text-[#ED553B] font-semibold text-[14px] relative after:content-[''] after:block after:w-[32.15px] after:h-[2px] after:bg-[#ED553B] after:absolute after:top-1/2 after:-left-3/4 lg:ms-16 mb-2">
           Categories
         </span>
-        <h2 className="text-[32px] font-semibold text-[#393280]">
+        <h2 className="text-base lg:text-[32px] font-semibold text-[#393280]">
           Explore our Top Categories
         </h2>
         <Swiper
@@ -132,7 +132,7 @@ const Home: FC = () => {
               alt="img1"
               className="transition-transform duration-300 ease-in-out hover:scale-105"
             />
-            <h3 className="text-[#393280] text-[24px] font-semibold">Higher Education</h3>
+            <h3 className="text-[#393280] text-sm lg:text-[24px] font-semibold">Higher Education</h3>
           </SwiperSlide>
           <SwiperSlide className="flex flex-col justify-center items-center gap-8">
             <img
@@ -140,7 +140,7 @@ const Home: FC = () => {
               alt="img1"
               className="transition-transform duration-300 ease-in-out hover:scale-105"
             />
-            <h3 className="text-[#393280] text-[24px] font-semibold">Management Books</h3>
+            <h3 className="text-[#393280] text-sm lg:text-[24px] font-semibold">Management Books</h3>
           </SwiperSlide>
           <SwiperSlide className="flex flex-col justify-center items-center gap-8">
             <img
@@ -148,7 +148,7 @@ const Home: FC = () => {
               alt="img1"
               className="transition-transform duration-300 ease-in-out hover:scale-105"
             />
-            <h3 className="text-[#393280] text-[24px] font-semibold"> Engineering Books</h3>
+            <h3 className="text-[#393280] text-sm lg:text-[24px] font-semibold"> Engineering Books</h3>
           </SwiperSlide>
           <SwiperSlide className="flex flex-col justify-center items-center gap-8">
             <img
@@ -156,7 +156,7 @@ const Home: FC = () => {
               alt="img1"
               className="transition-transform duration-300 ease-in-out hover:scale-105"
             />
-            <h3 className="text-[#393280] text-[24px] font-semibold"> Engineering Books</h3>
+            <h3 className="text-[#393280] text-sm lg:text-[24px] font-semibold"> Engineering Books</h3>
           </SwiperSlide>
           <SwiperSlide className="flex flex-col justify-center items-center gap-8">
             <img
@@ -164,7 +164,7 @@ const Home: FC = () => {
               alt="img1"
               className="transition-transform duration-300 ease-in-out hover:scale-105"
             />
-            <h3 className="text-[#393280] text-[24px] font-semibold"> Engineering Books</h3>
+            <h3 className="text-[#393280] text-sm lg:text-[24px] font-semibold"> Engineering Books</h3>
           </SwiperSlide>
           <SwiperSlide className="flex flex-col justify-center items-center gap-8">
             <img
@@ -172,7 +172,7 @@ const Home: FC = () => {
               alt="img1"
               className="transition-transform duration-300 ease-in-out hover:scale-105"
             />
-            <h3 className="text-[#393280] text-[24px] font-semibold"> Engineering Books</h3>
+            <h3 className="text-[#393280] text-sm lg:text-[24px] font-semibold"> Engineering Books</h3>
           </SwiperSlide>
         
         </Swiper>
