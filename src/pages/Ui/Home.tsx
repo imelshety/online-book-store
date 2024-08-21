@@ -18,8 +18,11 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CustomButton from "../../components/CustomButton";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { useTheme } from "@mui/material";
 
 const Home: FC = () => {
+  const theme = useTheme();
+
   return (
     <main className="container">
       <Header>
@@ -28,7 +31,7 @@ const Home: FC = () => {
         <HeaderNav />
         <HeaderIcons />
       </Header>
-      <section className="w-full h-full bg-gradient-to-r from-[#fdebea] to-white mt-[7rem] lg:mt-[10rem] py-8">
+      <section className="w-full h-full bg-gradient-to-r from-[#fdebea] to-white mt-[7rem] lg:mt-[10rem] py-8" style={{backgroundColor:`${theme.palette.background}`}}>
         <Swiper
           className="w-full h-full relative"
           modules={[Autoplay,Navigation, Pagination, Scrollbar, A11y]}

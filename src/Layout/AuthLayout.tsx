@@ -11,7 +11,7 @@ const AuthLayout = () => {
     alignItems="center"
     spacing={0}
   >
-    <img src={loginLogo} alt="logo-img" className="max-w-full" />
+    <img src={loginLogo} alt="logo-img" className="max-w-full hidden lg:block" />
     <Outlet/>
     </Stack>
 

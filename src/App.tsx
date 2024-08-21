@@ -13,6 +13,9 @@ import AuthLayout from './Layout/AuthLayout';
 import MasterLayout from './Layout/MasterLayout';
 import Home from './pages/Ui/Home';
 import { ToastContainer } from 'react-toastify';
+import ForgetPassword from './pages/Auth/ForgetPassword';
+import ResetPassword from './pages/Auth/ResetPassword';
+import ChangePassword from './pages/Auth/ChangePassword';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -74,6 +77,12 @@ const App: React.FC = () => {
         { index: true, element: <Login /> },
         { path: 'signin', element: <Login /> },
         { path: 'signup', element: <Register /> },
+        { path: 'forgot-password', element: <ForgetPassword /> },
+        { path: 'reset-password', element: <ResetPassword /> },
+        { path: 'change-password', element: <ChangePassword /> },
+
+
+
       ],
     },
     {

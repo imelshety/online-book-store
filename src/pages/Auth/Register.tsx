@@ -276,7 +276,7 @@ const Register = () => {
             },
           }}
         >
-          <Link to='/'>LOGIN</Link>
+          <Link to='/' className='w-full'>LOGIN</Link>
         </Button>
       </form>
     </Stack>
