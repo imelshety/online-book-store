@@ -9,8 +9,8 @@ import { BASE_URL } from '../../services/Api';
 import axios from 'axios';
 
 type Inputs = {
-  firstName: string,
-  lastName: string,
+  first_name: string,
+  last_name: string,
   email: string,
   password: string,
   role: string, // changed from array to string
@@ -66,12 +66,12 @@ const Register = () => {
         </Typography>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="w-1/2">
-        <FormControl fullWidth error={!!errors.firstName} sx={{ marginTop: 2 }}>
+        <FormControl fullWidth error={!!errors.first_name} sx={{ marginTop: 2 }}>
           <InputLabel htmlFor="first-name-input" sx={{ paddingTop: 1 }}>
             First Name
           </InputLabel>
           <Controller
-            name="firstName"
+            name="first_name"
             control={control}
             rules={{ required: 'First name is required' }}
             render={({ field }) => (
@@ -81,7 +81,7 @@ const Register = () => {
                 aria-describedby="first-name-helper-text"
                 sx={{
                   borderRadius: 2,
-                  borderColor: errors.firstName ? 'red' : '#6251DD',
+                  borderColor: errors.first_name ? 'red' : '#6251DD',
                   paddingInline: 2,
                   paddingTop: 1,
                   backgroundColor: '#F4F4FF',
@@ -95,15 +95,15 @@ const Register = () => {
             )}
           />
           <FormHelperText id="first-name-helper-text">
-            {errors.firstName?.message}
+            {errors.first_name?.message}
           </FormHelperText>
         </FormControl>
-        <FormControl fullWidth error={!!errors.lastName} sx={{ marginTop: 2 }}>
+        <FormControl fullWidth error={!!errors.last_name} sx={{ marginTop: 2 }}>
           <InputLabel htmlFor="last-name-input" sx={{ paddingTop: 1 }}>
             Last Name
           </InputLabel>
           <Controller
-            name="lastName"
+            name="last_name"
             control={control}
             rules={{ required: 'Last name is required' }}
             render={({ field }) => (
@@ -113,7 +113,7 @@ const Register = () => {
                 aria-describedby="last-name-helper-text"
                 sx={{
                   borderRadius: 2,
-                  borderColor: errors.lastName ? 'red' : '#6251DD',
+                  borderColor: errors.last_name ? 'red' : '#6251DD',
                   paddingInline: 2,
                   paddingTop: 1,
                   backgroundColor: '#F4F4FF',
@@ -127,7 +127,7 @@ const Register = () => {
             )}
           />
           <FormHelperText id="last-name-helper-text">
-            {errors.lastName?.message}
+            {errors.last_name?.message}
           </FormHelperText>
         </FormControl>
         <FormControl fullWidth error={!!errors.email} sx={{ marginTop: 2 }}>
