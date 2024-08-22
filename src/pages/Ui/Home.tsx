@@ -28,6 +28,7 @@ import { useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import Banner from "../../components/Banner";
 import Subscibe from "../../components/Subscibe";
+import Articles from "../../components/Articles";
 
 const Home: FC = () => {
   const theme = useTheme();
@@ -682,6 +683,7 @@ const Home: FC = () => {
       </section>
       <Banner/>
       <Subscibe/>
+      <Articles/>
     </main>
   );
 };
