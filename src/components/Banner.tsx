@@ -41,7 +41,7 @@ const Banner = () => {
         <SwiperSlide className="flex flex-col justify-center items-start gap-8">
           <h3
             className={`${
-              isDarkMode ? "text-white" : "text-[#393280]"
+              isDarkMode ? "text-[#393280]" : "text-[#393280]"
             } text-sm lg:text-[45px] leading-8 lg:leading-[66px] font-semibold`}
           >
             All books are 50% off now! Don't miss such a deal!
@@ -80,7 +80,7 @@ const Banner = () => {
         <SwiperSlide className="flex flex-col justify-center items-start gap-8">
           <h3
             className={`${
-              isDarkMode ? "text-white" : "text-[#393280]"
+               isDarkMode ? "text-[#393280]" : "text-[#393280]"
             } text-sm lg:text-[45px] leading-8 lg:leading-[66px] font-semibold`}
           >
             All books are 50% off now! Don't miss such a deal!
@@ -119,7 +119,7 @@ const Banner = () => {
         <SwiperSlide className="flex flex-col justify-center items-start gap-8">
           <h3
             className={`${
-              isDarkMode ? "text-white" : "text-[#393280]"
+              isDarkMode ? "text-[#393280]" : "text-[#393280]"
             } text-sm lg:text-[45px] leading-8 lg:leading-[66px] font-semibold`}
           >
             All books are 50% off now! Don't miss such a deal!
