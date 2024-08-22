@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body
+{
+    overflow-x: hidden;
+}
 /* custom pagination for swiper */
 .swiper-pagination-custom .swiper-pagination-bullet {
     background-color: transparent;
@@ -17,3 +21,19 @@
     background-color: #ED553B; /* Active dot background color */
     border-color: #ED553B; /* Active dot border color */
   }
+  /* Custom styles for the pagination dots */
+.swiper-pagination-custom-1 .swiper-pagination-bullet {
+    background-color: transparent;
+    padding: 5px;
+    border: 2px solid #ED553B; 
+    width: 12px;
+    height: 12px;
+    opacity: 1; /* Ensure bullets are visible */
+    transition: all 0.3s ease;
+  }
+  
+  .swiper-pagination-custom-1 .swiper-pagination-bullet-active {
+    background-color: #ED553B; /* Active dot background color */
+    border-color: #ED553B; /* Active dot border color */
+  }
+  

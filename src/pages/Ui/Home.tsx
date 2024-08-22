@@ -1,4 +1,3 @@
-
 import { FC } from "react";
 import sliderImg1 from "/assets/slider-top-1.png";
 import sliderImg2 from "/assets/slider-top-2.png";
@@ -10,6 +9,7 @@ import imgBook1 from "/assets/books/book1.png";
 import imgBook2 from "/assets/books/book2.png";
 import imgBook3 from "/assets/books/book3.png";
 import imgBook4 from "/assets/books/book4.png";
+import imgBook from "/assets/books/book.png";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
@@ -26,13 +26,14 @@ import CustomButton from "../../components/CustomButton";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
+import Banner from "../../components/Banner";
+import Subscibe from "../../components/Subscibe";
 
 const Home: FC = () => {
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark"; // Check if the current theme is dark mode
   return (
     <main className="container">
-   
       <section
         className={`w-full h-full mt-[7rem] lg:mt-[10rem] py-8 ${
           isDarkMode
@@ -302,12 +303,12 @@ const Home: FC = () => {
         <h2
           className={`${
             isDarkMode ? "text-white" : "text-[#393280]"
-          } text-xl lg:text-5xl mt-3 relative px-4 
+          }  text-xl lg:text-5xl mt-3 relative px-4 
   lg:before:content-[''] lg:before:w-full lg:before:h-[2px] 
   lg:before:absolute lg:before:top-1/2 lg:before:right-full 
   ${isDarkMode ? "before:bg-white" : "before:bg-[#E0E0E0]"} 
   lg:after:content-[''] lg:after:w-full lg:after:h-[2px] 
-  after:absolute after:top-1/2 after:left-full 
+  after:absolute lg:after:top-1/2 lg:after:left-full 
   ${isDarkMode ? "after:bg-white" : "after:bg-[#E0E0E0]"}`}
         >
           New Release Books
@@ -543,12 +544,144 @@ const Home: FC = () => {
           </SwiperSlide>
         </Swiper>
         <div className="w-full flex flex-col lg:flex-row gap-5 justify-center items-center lg:gap-20">
-        <div className="flex justify-center items-center gap-4 lg:ms-20 swiper-pagination-custom">
-        </div>
-        
-        <Link to='/' className="flex justify-center items-center gap-2 text-[16px] leading-[19.36px] text-nowrap text-[#ED553B] hover:underline tran"> View all products <FaArrowRightLong/> </Link>
+          <div className="flex justify-center items-center gap-4 lg:ms-20 swiper-pagination-custom"></div>
+
+          <Link
+            to="/"
+            className="flex justify-center items-center gap-2 text-[16px] leading-[19.36px] text-nowrap text-[#ED553B] hover:underline tran"
+          >
+            View all products <FaArrowRightLong />{" "}
+          </Link>
         </div>
       </section>
+      <section
+        className={`w-full h-full mt-[7rem] py-12 flex flex-col justify-center items-center gap-5 ${
+          !isDarkMode
+            ? "bg-gradient-to-r from-[#F7FFFE] to-[#FBEEEE] border"
+            : "" // Gradient for light mode
+        }`}
+      >
+        <Swiper
+          className="w-full h-full relative"
+          modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y]}
+          navigation={{
+            nextEl: ".swiper-button-next-3",
+            prevEl: ".swiper-button-prev-3",
+          }}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          scrollbar={{ draggable: true }}
+          spaceBetween={50}
+          slidesPerView={1}
+        >
+          <SwiperSlide className="flex flex-col lg:flex-row justify-center items-center gap-12">
+            <img
+              src={imgBook}
+              alt="Featured Book"
+              className="w-[300px] lg:w-[413px] shadow-lg rounded"
+            />
+            <div className="lg:w-1/3 flex flex-col items-center lg:items-start gap-4">
+              <h2
+                className={`text-3xl lg:text-5xl font-bold ${
+                  isDarkMode ? "text-white" : "text-[#393280]"
+                } `}
+              >
+                Featured Book
+              </h2>
+              <span className="text-sm uppercase text-[#7A7A7A]">
+                By Timbur Hood
+              </span>
+              <h3
+                className={`text-xl lg:text-3xl font-semibold ${
+                  isDarkMode ? "text-white" : "text-[#393280]"
+                }`}
+              >
+                Birds Gonna Be Happy
+              </h3>
+              <p className="text-sm text-wrap lg:text-lg text-[#7A7A7A]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu
+                feugiat amet, libero ipsum enim pharetra hac.
+              </p>
+              <span className="text-sm lg:text-2xl font-bold text-[#ED553B]">
+                $ 45.00
+              </span>
+              <CustomButton>View More</CustomButton>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className="flex flex-col lg:flex-row justify-center items-center gap-12">
+            <img
+              src={imgBook1}
+              alt="Featured Book"
+              className="w-[300px] lg:w-[413px] shadow-lg rounded"
+            />
+            <div className="lg:w-1/3 flex flex-col items-center lg:items-start gap-4">
+              <h2
+                className={`text-3xl lg:text-5xl font-bold ${
+                  isDarkMode ? "text-white" : "text-[#393280]"
+                } `}
+              >
+                Featured Book
+              </h2>
+              <span className="text-sm uppercase text-[#7A7A7A]">
+                By Timbur Hood
+              </span>
+              <h3
+                className={`text-xl lg:text-3xl font-semibold ${
+                  isDarkMode ? "text-white" : "text-[#393280]"
+                }`}
+              >
+                Birds Gonna Be Happy
+              </h3>
+              <p className="text-sm text-wrap lg:text-lg text-[#7A7A7A]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu
+                feugiat amet, libero ipsum enim pharetra hac.
+              </p>
+              <span className="text-sm lg:text-2xl font-bold text-[#ED553B]">
+                $ 45.00
+              </span>
+              <CustomButton>View More</CustomButton>
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className="flex flex-col lg:flex-row justify-center items-center gap-12">
+            <img
+              src={imgBook2}
+              alt="Featured Book"
+              className="w-[300px] lg:w-[413px] shadow-lg rounded"
+            />
+            <div className="lg:w-1/3 flex flex-col items-center lg:items-start gap-4">
+              <h2
+                className={`text-3xl lg:text-5xl font-bold ${
+                  isDarkMode ? "text-white" : "text-[#393280]"
+                } `}
+              >
+                Featured Book
+              </h2>
+              <span className="text-sm uppercase text-[#7A7A7A]">
+                By Timbur Hood
+              </span>
+              <h3
+                className={`text-xl lg:text-3xl font-semibold ${
+                  isDarkMode ? "text-white" : "text-[#393280]"
+                }`}
+              >
+                Birds Gonna Be Happy
+              </h3>
+              <p className="text-sm text-wrap lg:text-lg text-[#7A7A7A]">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu
+                feugiat amet, libero ipsum enim pharetra hac.
+              </p>
+              <span className="text-sm lg:text-2xl font-bold text-[#ED553B]">
+                $ 45.00
+              </span>
+              <CustomButton>View More</CustomButton>
+            </div>
+          </SwiperSlide>
+        </Swiper>
+      </section>
+      <Banner/>
+      <Subscibe/>
     </main>
   );
 };
