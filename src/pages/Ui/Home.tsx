@@ -1,9 +1,5 @@
+
 import { FC } from "react";
-import Header from "../../components/Header/Header";
-import HeaderIcons from "../../components/Header/Subcomponents/HeaderIcons";
-import HeaderLogo from "../../components/Header/Subcomponents/HeaderLogo";
-import HeaderNav from "../../components/Header/Subcomponents/HeaderNav";
-import HeaderTop from "../../components/Header/Subcomponents/HeaderTop";
 import sliderImg1 from "/assets/slider-top-1.png";
 import sliderImg2 from "/assets/slider-top-2.png";
 import sliderImg3 from "/assets/slider-top-3.png";
@@ -36,12 +32,7 @@ const Home: FC = () => {
   const isDarkMode = theme.palette.mode === "dark"; // Check if the current theme is dark mode
   return (
     <main className="container">
-      <Header>
-        <HeaderTop />
-        <HeaderLogo />
-        <HeaderNav />
-        <HeaderIcons />
-      </Header>
+   
       <section
         className={`w-full h-full mt-[7rem] lg:mt-[10rem] py-8 ${
           isDarkMode
