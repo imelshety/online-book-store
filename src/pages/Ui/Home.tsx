@@ -22,13 +22,13 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import CustomButton from "../../components/CustomButton";
+import CustomButton from "../../Shared/components/CustomButton";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import Banner from "../../components/Banner";
-import Subscibe from "../../components/Subscibe";
-import Articles from "../../components/Articles";
+import Banner from "../../Shared/components/Banner";
+import Subscibe from "../../Shared/components/Subscibe";
+import Articles from "../../Shared/components/Articles";
 
 const Home: FC = () => {
   const theme = useTheme();

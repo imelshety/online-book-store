@@ -16,7 +16,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import logoImage from "/assets/Logo.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../services/Api";
+import { AUTH_URLS } from "../../Shared/constant/Api";
 
 type Inputs = {
   email: string;
@@ -42,7 +42,7 @@ const ResetPassword = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/auth/reset-password`,
+        `${AUTH_URLS.resetPassword}`,
         data,
         {
           headers: {

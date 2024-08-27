@@ -19,7 +19,7 @@ import logoImage from "/assets/Logo.png";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { BASE_URL } from "../../services/Api";
+import { AUTH_URLS } from "../../Shared/constant/Api";
 
 type Inputs = {
   email: string;
@@ -42,9 +42,9 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
-      const response = await axios.post(`${BASE_URL}/api/auth/login`, data);
+      const response = await axios.post(`${AUTH_URLS.login}`, data);
       console.log("Response:", response.data);
-
+      localStorage.setItem("token", response.data?.data.accessToken);
       const profile = response.data?.data.profile;
       if (profile && profile.first_name) {
         toast.success(

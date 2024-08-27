@@ -5,7 +5,7 @@ import { useForm, Controller , SubmitHandler} from 'react-hook-form';
 import logoImage from '/assets/Logo.png';
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../../services/Api';
+import { AUTH_URLS } from '../../Shared/constant/Api';
 
 type Inputs = {
   email:string ;
@@ -21,7 +21,7 @@ const ForgetPassword = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/auth/forgot-password`,
+        `${AUTH_URLS.forgotPassword}`,
         data,
         {
           headers: {
@@ -31,7 +31,7 @@ const ForgetPassword = () => {
       );
       
       console.log(response);
-      navigate("/signin");
+      navigate("/reset-password");
     } catch (error) {
       console.error('Registration error:', error);
     }

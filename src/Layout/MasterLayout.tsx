@@ -1,12 +1,12 @@
 
 
 import { Outlet } from 'react-router-dom'
-import Header from '../components/Header/Header'
-import HeaderTop from '../components/Header/Subcomponents/HeaderTop'
-import HeaderLogo from '../components/Header/Subcomponents/HeaderLogo'
-import HeaderNav from '../components/Header/Subcomponents/HeaderNav'
-import HeaderIcons from '../components/Header/Subcomponents/HeaderIcons'
-import Footer from '../components/Footer/Footer'
+import Header from '../Shared/components/Header/Header'
+import HeaderTop from '../Shared/components/Header/Subcomponents/HeaderTop'
+import HeaderLogo from '../Shared/components/Header/Subcomponents/HeaderLogo'
+import HeaderNav from '../Shared/components/Header/Subcomponents/HeaderNav'
+import HeaderIcons from '../Shared/components/Header/Subcomponents/HeaderIcons'
+import Footer from '../Shared/components/Footer/Footer'
 
 const MasterLayout = () => {
   return (

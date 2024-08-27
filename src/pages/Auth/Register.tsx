@@ -5,7 +5,7 @@ import { useTheme } from '@mui/material/styles';
 import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import logoImage from '/assets/Logo.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { BASE_URL } from '../../services/Api';
+import { AUTH_URLS } from '../../Shared/constant/Api';
 import axios from 'axios';
 
 type Inputs = {
@@ -15,7 +15,6 @@ type Inputs = {
   password: string,
   role: string, // changed from array to string
 };
-const token ='https://upskilling-egypt.com:3007/api/auth/refresh-tokens?refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NjQ1MzA1MGY5OTMxN2NiZGZlOWI2NWEiLCJlbWFpbCI6ImFiZGVscmhtYW5mYXJnaGFseTE5OThAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzE1ODExMjkzLCJleHAiOjE3MTY0MTYwOTN9.dnByiOwZWWggwAVRd9DUsez7UjJrgBr_PK-YHc6Qoi'
 const Register = () => {
   const theme = useTheme();
   const [showPassword, setShowPassword] = useState(false);
@@ -29,12 +28,11 @@ const Register = () => {
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/api/auth/register`,
+        `${AUTH_URLS.register}`,
         data,
         {
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': token
           },
         }
       );
