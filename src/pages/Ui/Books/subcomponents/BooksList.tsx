@@ -45,7 +45,7 @@ const BooksList = () => {
   const paginatedBooks = books.slice(startIndex, startIndex + booksPerPage);
 
   return (
-    <Stack className={`w-[85%]  me-8 mx-auto mb-12 ${isDarkMode ? 'bg-[061C2B]' : 'bg-white'}`}>
+    <Stack className={`w-[85%] h-[100%]  me-8 mx-auto mb-12 ${isDarkMode ? 'bg-[061C2B]' : 'bg-white'}`}>
       <Grid container spacing={{ xs: 2, md: 5 }} paddingX={4}>
         {paginatedBooks.map((book: Book) => (
           <Grid key={book._id} item xs={12} sm={6} md={4} display='flex' flexDirection="column" justifyContent='center' alignItems='center' gap={2}>

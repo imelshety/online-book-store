@@ -29,12 +29,13 @@ export default function PreSlider() {
         padding: 2,
         height: '100%',
         marginY : '12rem',
+        overflowY: 'hidden',
       }}
       role="presentation"
     >
       <Box sx={{ mb: 2 }}>
         <Typography variant='h6' sx={{ color: isDarkMode ? '#061C2B' : '#ED553B' }}>Price</Typography>
-        <Divider  sx={{ color: isDarkMode ? '#061C2B' : '#ED553B' , my:1}} />
+        <Divider  sx={{ color: isDarkMode ? '#061C2B' : '#ED553B' }} />
         <Stack direction="row" spacing={1} alignItems="center" >
         <TextField
             id="outlined-basic"
@@ -96,7 +97,7 @@ export default function PreSlider() {
             }}
           />
         </Stack>
-        <Button variant="contained" sx={{backgroundColor:!isDarkMode?'white': '#061C2B' , color : !isDarkMode ? '#061C2B':'white', my:3}} fullWidth>
+        <Button variant="contained" sx={{backgroundColor:!isDarkMode?'white': '#061C2B' , color : !isDarkMode ? '#061C2B':'white' ,mt:3}} fullWidth>
           Filter
         </Button>
       </Box>

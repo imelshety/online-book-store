@@ -18,7 +18,7 @@ const Books = () => {
         <HeaderLogo />
         <HeaderIcons />
       </Header>
-      <Box sx={{ display: 'flex', height: 'calc(100vh - 12rem)', marginTop: '12rem', overflow: 'hidden' }}>
+      <Box sx={{ display: 'flex', marginTop: '12rem', overflow: 'hidden' }}>
         <PreSlider />
         <Box
           sx={{
