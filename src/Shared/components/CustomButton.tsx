@@ -16,7 +16,7 @@ const CustomButton: FC<CustomButtonProps> = ({ children }) => {
     <button
       className={`${
         !isDarkMode
-          ? "text-[#393280] border-[#393280] hover:text-white hover:bg-[#393280]"
+          ? "text-[#061C2B] border-[#061C2B] hover:text-white hover:bg-[#061C2B]"
           : " text-white border-[#ED553B] hover:text-[#ED553B] hover:bg-white"
       }  border-2  rounded-[7px] py-4 px-7 uppercase flex gap-2 items-center justify-center  duration-500 transition-all ease-out`}
     >

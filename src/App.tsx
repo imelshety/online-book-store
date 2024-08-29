@@ -6,16 +6,21 @@ import { lightTheme, darkTheme } from './theme';
 import Switch from '@mui/material/Switch';
 import { FormControlLabel } from '@mui/material';
 import 'react-toastify/dist/ReactToastify.css';
+import { Provider } from 'react-redux'
+import store from './rtk/store';
+import { ToastContainer } from 'react-toastify';
 
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import AuthLayout from './Layout/AuthLayout';
 import MasterLayout from './Layout/MasterLayout';
 import Home from './pages/Ui/Home';
-import { ToastContainer } from 'react-toastify';
 import ForgetPassword from './pages/Auth/ForgetPassword';
 import ResetPassword from './pages/Auth/ResetPassword';
 import ChangePassword from './pages/Auth/ChangePassword';
+import ErrorPage from './Shared/components/ErrorPage'
+import Books from './pages/Ui/Books/Books';
+import BookDetails from './pages/Ui/Books/subcomponents/BookDetails';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -84,13 +89,18 @@ const App: React.FC = () => {
 
 
       ],
+      errorElement: <ErrorPage />
     },
     {
       path: 'home',
       element: <MasterLayout />,
       children: [
         { index: true, element: <Home /> },
+        { path: 'books', element: <Books /> },
+        { path :"books/:bookId" , element :<BookDetails /> }
+
       ],
+      errorElement: <ErrorPage />
     },
   ]);
 
@@ -101,6 +111,7 @@ const App: React.FC = () => {
   };
 
   return (
+    <Provider store={store}>
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
        <RouterProvider router={routers} />
        <ToastContainer />
@@ -113,6 +124,7 @@ const App: React.FC = () => {
 
      
     </ThemeProvider>
+    </Provider>
   );
 };
 

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import sliderImg1 from "/assets/slider-top-1.png";
 import sliderImg2 from "/assets/slider-top-2.png";
 import sliderImg3 from "/assets/slider-top-3.png";
@@ -7,8 +7,6 @@ import img2 from "/assets/img2.png";
 import img3 from "/assets/img3.png";
 import imgBook1 from "/assets/books/book1.png";
 import imgBook2 from "/assets/books/book2.png";
-import imgBook3 from "/assets/books/book3.png";
-import imgBook4 from "/assets/books/book4.png";
 import imgBook from "/assets/books/book.png";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -24,16 +22,52 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import CustomButton from "../../Shared/components/CustomButton";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import { useTheme } from "@mui/material";
+import { Grid, Stack, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import Banner from "../../Shared/components/Banner";
 import Subscibe from "../../Shared/components/Subscibe";
 import Articles from "../../Shared/components/Articles";
+import Header from "../../Shared/components/Header/Header";
+import HeaderTop from "../../Shared/components/Header/Subcomponents/HeaderTop";
+import HeaderLogo from "../../Shared/components/Header/Subcomponents/HeaderLogo";
+import HeaderNav from "../../Shared/components/Header/Subcomponents/HeaderNav";
+import HeaderIcons from "../../Shared/components/Header/Subcomponents/HeaderIcons";
+import { fetchBooks } from "../../rtk/books/booksSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Book, RootState } from "../../types";
+import { AppDispatch } from "../../rtk/store";
+import { FaLongArrowAltRight } from "react-icons/fa";
+import { getRandomImage } from "../../Shared/constant/ListImages";
 
 const Home: FC = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const books = useSelector((state: RootState) => state.books.items);
+  const bookStatus = useSelector((state: RootState) => state.books.status);
+  const error = useSelector((state: RootState) => state.books.error);
+  useEffect(() => {
+    if (bookStatus === 'idle') {
+      dispatch(fetchBooks());
+    }
+  }, [bookStatus, dispatch]);
+
+  if (bookStatus === 'loading') {
+    return <div>Loading... Loading... Loading...</div>;
+  }
+
+  if (bookStatus === 'failed') {
+    return <div>{error}</div>;
+  }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const theme = useTheme();
   const isDarkMode = theme.palette.mode === "dark"; // Check if the current theme is dark mode
   return (
+    <>
+     <Header>
+        <HeaderTop />
+        <HeaderLogo />
+        <HeaderNav />
+        <HeaderIcons />
+      </Header>
     <main className="container">
       <section
         className={`w-full h-full mt-[7rem] lg:mt-[10rem] py-8 ${
@@ -80,7 +114,7 @@ const Home: FC = () => {
                 feugiat amet, libero ipsum enim pharetra hac. Urna commodo,
                 lacus ut magna velit eleifend. Amet, quis urna, a eu.
               </p>
-              <CustomButton>Read More</CustomButton>
+              <CustomButton><Link to="/home/books">read more</Link></CustomButton>
             </div>
             <div>
               <img src={sliderImg1} alt="slider-top-1" />
@@ -105,7 +139,7 @@ const Home: FC = () => {
                 feugiat amet, libero ipsum enim pharetra hac. Urna commodo,
                 lacus ut magna velit eleifend. Amet, quis urna, a eu.
               </p>
-              <CustomButton>Read More</CustomButton>
+              <CustomButton><Link to="/home/books">read more</Link></CustomButton>
             </div>
             <div>
               <img src={sliderImg2} alt="slider-top-2" />
@@ -129,7 +163,7 @@ const Home: FC = () => {
                 feugiat amet, libero ipsum enim pharetra hac. Urna commodo,
                 lacus ut magna velit eleifend. Amet, quis urna, a eu.
               </p>
-              <CustomButton>Read More</CustomButton>
+              <CustomButton><Link to="/home/books">read more</Link></CustomButton>
             </div>
             <div>
               <img src={sliderImg3} alt="slider-top-2" />
@@ -285,7 +319,7 @@ const Home: FC = () => {
         </div>
         <div className="w-full my-[5rem] flex justify-center">
           <CustomButton>
-            <Link to="/products">view more</Link>
+            <Link to="/home/books">view more</Link>
           </CustomButton>
         </div>
       </section>
@@ -347,208 +381,39 @@ const Home: FC = () => {
             },
           }}
         >
-          <SwiperSlide className="flex flex-col justify-center items-center gap-8">
-            <div className="bg-white rounded p-4 group relative transition-all ease-out duration-500">
-              <span className="hidden  lg:group-hover:flex group-hover:duration-300  rounded bg-[#ED553B] uppercase py-5 px-8 lg:px-16 text-white absolute top-1/2 left-10 z-20 transition-transform duration-300 ease-in-out hover:scale-105">
-                add to cart
-              </span>
+         
+          {books.map((book: Book) => (
+             <SwiperSlide className="flex flex-col justify-center items-center gap-8">
+          <Grid key={book._id} item xs={12} sm={6} md={4} display='flex' flexDirection="column" justifyContent='center' alignItems='center' gap={2}>
+            <Stack className={`bg-white rounded p-4 group relative transition-all ease-out duration-500 ${!isDarkMode ? 'border-2': '' }`}>
+              <Link to={`/home/books/${book._id}`} className="hidden group-hover:flex group-hover:duration-300 rounded bg-[#ED553B] uppercase py-5 px-2 lg:px-12 text-white absolute top-1/2 left-16 lg:left-8 z-20 transition-transform duration-300 ease-in-out hover:scale-105 justify-center items-center text-nowrap gap-3">
+                View Details <FaLongArrowAltRight />
+              </Link>
               <img
-                src={imgBook1}
-                alt="img1"
-                className="transition-transform duration-300 ease-in-out hover:scale-110"
+                src={getRandomImage()}
+                alt="Book Cover"
+                className="max-w-full transition-transform duration-300 ease-in-out hover:scale-110"
               />
-            </div>
-
-            <h3
-              className={`${
-                isDarkMode ? "text-white" : "text-[#393280]"
-              } text-sm lg:text-[24px] font-semibold`}
-            >
-              Simple way of piece life
+            </Stack>
+            <h3 className={`${isDarkMode ? 'text-white' : 'text-[#393280]'} leading-8 text-sm lg:text-[24px] font-semibold`}>
+              {book.name}
             </h3>
-            <span className="text-sm font-normal">Armor Ramsey</span>
-            <span
-              className={`text-sm lg:text-[18px] ${
-                isDarkMode ? "text-white" : "text-[#ED553B]"
-              } font-bold  `}
-            >
-              $ 40.00
+            <span className="text-sm font-normal">{book.auther}</span>
+            <span className={`text-sm lg:text-[18px] ${isDarkMode ? 'text-white' : 'text-[#ED553B]'} font-bold`}>
+              $ {book.price}
             </span>
+          </Grid>
           </SwiperSlide>
-          <SwiperSlide className="flex flex-col justify-center items-center gap-8">
-            <div className="bg-white rounded p-4 group relative transition-all ease-out duration-500">
-              <span className="hidden lg:group-hover:flex group-hover:duration-300  rounded bg-[#ED553B] uppercase py-5 px-8 lg:px-16 text-white absolute top-1/2 left-10 z-20 transition-transform duration-300 ease-in-out hover:scale-105">
-                add to cart
-              </span>
-              <img
-                src={imgBook2}
-                alt="img1"
-                className="transition-transform duration-300 ease-in-out hover:scale-110"
-              />
-            </div>
 
-            <h3
-              className={`${
-                isDarkMode ? "text-white" : "text-[#393280]"
-              } text-sm lg:text-[24px] font-semibold`}
-            >
-              Great travel at desert
-            </h3>
-            <span className="text-sm font-normal">Sanchit Howdy</span>
-            <span
-              className={`text-sm lg:text-[18px] ${
-                isDarkMode ? "text-white" : "text-[#ED553B]"
-              } font-bold  `}
-            >
-              $ 38.00
-            </span>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col justify-center items-center gap-8">
-            <div className="bg-white rounded p-4 group relative transition-all ease-out duration-500">
-              <span className="hidden lg:group-hover:flex group-hover:duration-300  rounded bg-[#ED553B] uppercase py-5 px-8 lg:px-16 text-white absolute top-1/2 left-10 z-20 transition-transform duration-300 ease-in-out hover:scale-105">
-                add to cart
-              </span>
-              <img
-                src={imgBook3}
-                alt="img1"
-                className="transition-transform duration-300 ease-in-out hover:scale-110"
-              />
-            </div>
-
-            <h3
-              className={`${
-                isDarkMode ? "text-white" : "text-[#393280]"
-              } text-sm lg:text-[24px] font-semibold`}
-            >
-              The lady beauty Scarlett
-            </h3>
-            <span className="text-sm font-normal">Arthur Doyle</span>
-            <span
-              className={`text-sm lg:text-[18px] ${
-                isDarkMode ? "text-white" : "text-[#ED553B]"
-              } font-bold  `}
-            >
-              $ 45.00
-            </span>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col justify-center items-center gap-8">
-            <div className="bg-white rounded p-4 group relative transition-all ease-out duration-500">
-              <span className="hidden lg:group-hover:flex group-hover:duration-300  rounded bg-[#ED553B] uppercase py-5 px-8 lg:px-16 text-white absolute top-1/2 left-10 z-20 transition-transform duration-300 ease-in-out hover:scale-105">
-                add to cart
-              </span>
-              <img
-                src={imgBook4}
-                alt="img1"
-                className="transition-transform duration-300 ease-in-out hover:scale-110"
-              />
-            </div>
-
-            <h3
-              className={`${
-                isDarkMode ? "text-white" : "text-[#393280]"
-              } text-sm lg:text-[24px] font-semibold`}
-            >
-              Once upon a time
-            </h3>
-            <span className="text-sm font-normal">Klien Marry</span>
-            <span
-              className={`text-sm lg:text-[18px] ${
-                isDarkMode ? "text-white" : "text-[#ED553B]"
-              } font-bold  `}
-            >
-              $ 35.00
-            </span>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col justify-center items-center gap-8">
-            <div className="bg-white rounded p-4 group relative transition-all ease-out duration-500">
-              <span className="hidden lg:group-hover:flex group-hover:duration-300  rounded bg-[#ED553B] uppercase py-5 px-8 lg:px-16 text-white absolute top-1/2 left-10 z-20 transition-transform duration-300 ease-in-out hover:scale-105">
-                add to cart
-              </span>
-              <img
-                src={imgBook2}
-                alt="img1"
-                className="transition-transform duration-300 ease-in-out hover:scale-110"
-              />
-            </div>
-
-            <h3
-              className={`${
-                isDarkMode ? "text-white" : "text-[#393280]"
-              } text-sm lg:text-[24px] font-semibold`}
-            >
-              Great travel at desert
-            </h3>
-            <span className="text-sm font-normal">Sanchit Howdy</span>
-            <span
-              className={`text-sm lg:text-[18px] ${
-                isDarkMode ? "text-white" : "text-[#ED553B]"
-              } font-bold  `}
-            >
-              $ 38.00
-            </span>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col justify-center items-center gap-8">
-            <div className="bg-white rounded p-4 group relative transition-all ease-out duration-500">
-              <span className="hidden lg:group-hover:flex group-hover:duration-300  rounded bg-[#ED553B] uppercase py-5 px-8 lg:px-16 text-white absolute top-1/2 left-10 z-20 transition-transform duration-300 ease-in-out hover:scale-105">
-                add to cart
-              </span>
-              <img
-                src={imgBook1}
-                alt="img1"
-                className="transition-transform duration-300 ease-in-out hover:scale-110"
-              />
-            </div>
-
-            <h3
-              className={`${
-                isDarkMode ? "text-white" : "text-[#393280]"
-              } text-sm lg:text-[24px] font-semibold`}
-            >
-              Simple way of piece life
-            </h3>
-            <span className="text-sm font-normal">Armor Ramsey</span>
-            <span
-              className={`text-sm lg:text-[18px] ${
-                isDarkMode ? "text-white" : "text-[#ED553B]"
-              } font-bold  `}
-            >
-              $ 40.00
-            </span>
-          </SwiperSlide>
-          <SwiperSlide className="flex flex-col justify-center items-center gap-8">
-            <div className="bg-white rounded p-4 group relative transition-all ease-out duration-500">
-              <span className="hidden lg:group-hover:flex group-hover:duration-300  rounded bg-[#ED553B] uppercase py-5 px-8 lg:px-16 text-white absolute top-1/2 left-10 z-20 transition-transform duration-300 ease-in-out hover:scale-105">
-                add to cart
-              </span>
-              <img
-                src={imgBook4}
-                alt="img1"
-                className="transition-transform duration-300 ease-in-out hover:scale-110"
-              />
-            </div>
-
-            <h3
-              className={`${
-                isDarkMode ? "text-white" : "text-[#393280]"
-              } text-sm lg:text-[24px] font-semibold`}
-            >
-              Once upon a time
-            </h3>
-            <span className="text-sm font-normal">Klien Marry</span>
-            <span
-              className={`text-sm lg:text-[18px] ${
-                isDarkMode ? "text-white" : "text-[#ED553B]"
-              } font-bold  `}
-            >
-              $ 35.00
-            </span>
-          </SwiperSlide>
+        ))}
+           
+       
         </Swiper>
         <div className="w-full flex flex-col lg:flex-row gap-5 justify-center items-center lg:gap-20">
           <div className="flex justify-center items-center gap-4 lg:ms-20 swiper-pagination-custom"></div>
 
           <Link
-            to="/"
+            to="/home/books"
             className="flex justify-center items-center gap-2 text-[16px] leading-[19.36px] text-nowrap text-[#ED553B] hover:underline tran"
           >
             View all products <FaArrowRightLong />{" "}
@@ -608,7 +473,7 @@ const Home: FC = () => {
               <span className="text-sm lg:text-2xl font-bold text-[#ED553B]">
                 $ 45.00
               </span>
-              <CustomButton>View More</CustomButton>
+              <CustomButton><Link to="/home/books">view more</Link></CustomButton>
             </div>
           </SwiperSlide>
           <SwiperSlide className="flex flex-col lg:flex-row justify-center items-center gap-12">
@@ -642,7 +507,7 @@ const Home: FC = () => {
               <span className="text-sm lg:text-2xl font-bold text-[#ED553B]">
                 $ 45.00
               </span>
-              <CustomButton>View More</CustomButton>
+              <CustomButton><Link to="/home/books">view more</Link></CustomButton>
             </div>
           </SwiperSlide>
           <SwiperSlide className="flex flex-col lg:flex-row justify-center items-center gap-12">
@@ -676,7 +541,7 @@ const Home: FC = () => {
               <span className="text-sm lg:text-2xl font-bold text-[#ED553B]">
                 $ 45.00
               </span>
-              <CustomButton>View More</CustomButton>
+              <CustomButton><Link to="/home/books">view more</Link></CustomButton>
             </div>
           </SwiperSlide>
         </Swiper>
@@ -685,6 +550,7 @@ const Home: FC = () => {
       <Subscibe/>
       <Articles/>
     </main>
+    </>
   );
 };
 
