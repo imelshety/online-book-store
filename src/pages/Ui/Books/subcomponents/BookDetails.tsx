@@ -9,6 +9,7 @@ import axios from 'axios';
 import { Book } from '../../../../types';
 import CustomButton from '../../../../Shared/components/CustomButton';
 import { FaTentArrowTurnLeft } from 'react-icons/fa6';
+import Loading from '../../../../Shared/components/Loading';
 
 const BookDetails = () => {
   const { bookId } = useParams<{ bookId: string }>(); // Ensure bookId is typed correctly
@@ -49,7 +50,7 @@ const BookDetails = () => {
   }, [bookId, token]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {

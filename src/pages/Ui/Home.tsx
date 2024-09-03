@@ -1,3 +1,4 @@
+
 import { FC, useEffect } from "react";
 import sliderImg1 from "/assets/slider-top-1.png";
 import sliderImg2 from "/assets/slider-top-2.png";
@@ -28,16 +29,13 @@ import Banner from "../../Shared/components/Banner";
 import Subscibe from "../../Shared/components/Subscibe";
 import Articles from "../../Shared/components/Articles";
 import Header from "../../Shared/components/Header/Header";
-import HeaderTop from "../../Shared/components/Header/Subcomponents/HeaderTop";
-import HeaderLogo from "../../Shared/components/Header/Subcomponents/HeaderLogo";
-import HeaderNav from "../../Shared/components/Header/Subcomponents/HeaderNav";
-import HeaderIcons from "../../Shared/components/Header/Subcomponents/HeaderIcons";
 import { fetchBooks } from "../../rtk/books/booksSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Book, RootState } from "../../types";
 import { AppDispatch } from "../../rtk/store";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { getRandomImage } from "../../Shared/constant/ListImages";
+import Loading from "../../Shared/components/Loading";
 
 const Home: FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -51,7 +49,7 @@ const Home: FC = () => {
   }, [bookStatus, dispatch]);
 
   if (bookStatus === 'loading') {
-    return <div>Loading... Loading... Loading...</div>;
+    return <Loading/>;
   }
 
   if (bookStatus === 'failed') {
@@ -63,10 +61,10 @@ const Home: FC = () => {
   return (
     <>
      <Header>
-        <HeaderTop />
-        <HeaderLogo />
-        <HeaderNav />
-        <HeaderIcons />
+        <Header.HeaderTop />
+        <Header.Logo />
+        <Header.Nav />
+        <Header.Icons />
       </Header>
     <main className="container">
       <section

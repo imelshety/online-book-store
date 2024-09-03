@@ -7,6 +7,7 @@ import { Grid, Stack, useTheme, Pagination, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { FaLongArrowAltRight } from 'react-icons/fa';
 import { getRandomImage } from '../../../../Shared/constant/ListImages';
+import Loading from '../../../../Shared/components/Loading';
 
 
 
@@ -33,7 +34,7 @@ const BooksList = () => {
   }, [bookStatus, dispatch]);
 
   if (bookStatus === 'loading') {
-    return <div>Loading... Loading... Loading...</div>;
+    return <Loading/>;
   }
 
   if (bookStatus === 'failed') {

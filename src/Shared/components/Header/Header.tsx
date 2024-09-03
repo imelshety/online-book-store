@@ -7,6 +7,7 @@ import HeaderNav from "./Subcomponents/HeaderNav";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { HiBars3 } from "react-icons/hi2";
 import { useTheme } from "@mui/material/styles";
+import HeaderActions from "./Subcomponents/HeaderActions";
 
 type HeaderProps = {
   children: ReactNode;
@@ -17,6 +18,7 @@ type HeaderComponent = React.FC<HeaderProps> & {
   Logo: React.FC;
   Icons: React.FC;
   Nav: React.FC;
+  Actions : React.FC;
 };
 
 const Header: HeaderComponent = ({ children }) => {
@@ -70,5 +72,7 @@ Header.HeaderTop = HeaderTop;
 Header.Logo = HeaderLogo;
 Header.Icons = HeaderIcons;
 Header.Nav = HeaderNav;
+Header.Actions = HeaderActions;
+
 
 export default Header;

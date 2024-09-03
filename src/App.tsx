@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider, styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,6 +21,7 @@ import ChangePassword from './pages/Auth/ChangePassword';
 import ErrorPage from './Shared/components/ErrorPage'
 import Books from './pages/Ui/Books/Books';
 import BookDetails from './pages/Ui/Books/subcomponents/BookDetails';
+import Cart from './pages/Ui/Cart/Cart';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -97,7 +98,9 @@ const App: React.FC = () => {
       children: [
         { index: true, element: <Home /> },
         { path: 'books', element: <Books /> },
-        { path :"books/:bookId" , element :<BookDetails /> }
+        { path :"books/:bookId" , element :<BookDetails /> },
+        { path: 'cart', element: <Cart /> },
+
 
       ],
       errorElement: <ErrorPage />
@@ -113,18 +116,17 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-       <RouterProvider router={routers} />
-       <ToastContainer />
-      <CssBaseline />
-     
-        <FormControlLabel
-          control={<MaterialUISwitch checked={isDarkMode} onChange={toggleTheme} />}
-          label=''
-        />
-
-     
+      
+          <RouterProvider router={routers} />
+          <ToastContainer />
+          <CssBaseline />
+          <FormControlLabel
+            control={<MaterialUISwitch checked={isDarkMode} onChange={toggleTheme} />}
+            label=''
+          />
+        
     </ThemeProvider>
-    </Provider>
+  </Provider>
   );
 };
 

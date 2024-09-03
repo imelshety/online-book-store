@@ -63,6 +63,7 @@ export default function PreSlider() {
                 '&.MuiOutlinedInput-root-focused ' :{
                   color :  '#ED553B',
                 }
+              
               },
             }}
           />

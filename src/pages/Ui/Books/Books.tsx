@@ -1,8 +1,5 @@
+
 import Header from "../../../Shared/components/Header/Header";
-import HeaderActions from "../../../Shared/components/Header/Subcomponents/HeaderActions";
-import HeaderIcons from "../../../Shared/components/Header/Subcomponents/HeaderIcons";
-import HeaderLogo from "../../../Shared/components/Header/Subcomponents/HeaderLogo";
-import HeaderTop from "../../../Shared/components/Header/Subcomponents/HeaderTop";
 import PreSlider from "../../../Shared/components/PreSlider";
 import BooksList from "./subcomponents/BooksList";
 import { Box, useTheme } from '@mui/material';
@@ -13,10 +10,10 @@ const Books = () => {
   return (
     <>
       <Header>
-        <HeaderTop />
-        <HeaderActions />
-        <HeaderLogo />
-        <HeaderIcons />
+        <Header.HeaderTop />
+        <Header.Actions />
+        <Header.Logo />
+        <Header.Icons />
       </Header>
       <Box sx={{ display: 'flex', marginTop: '12rem', overflow: 'hidden' }}>
         <PreSlider />
