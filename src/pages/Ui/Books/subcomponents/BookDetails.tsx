@@ -27,7 +27,7 @@ const BookDetails: React.FC = () => {
         id: book._id,
         name: book.name || book.title, // Ensure this matches the expected structure
         title: book.title || book.name, // Mapping title
-        image: book.image || '/assets/books/book.png', // Provide a default image if not present
+        image: book.image || '/assets/books/book1.png', // Provide a default image if not present
         price : book.price,
       };
       dispatch(addItem(formattedBook));

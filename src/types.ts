@@ -1,7 +1,7 @@
 // src/types.ts
 
 export interface Book {
-  _id: string;
+  _id: number;
   id: string;
   name: string;
   auther: string;
@@ -10,7 +10,6 @@ export interface Book {
   image?: string;
   title: string;
   cover: string;
-  
 }
 export interface imgListType {
   img1: string;
