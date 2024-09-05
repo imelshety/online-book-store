@@ -4,16 +4,18 @@ import { useTheme } from "@mui/material";
 
 // Define type for CustomButton props
 interface CustomButtonProps {
+  onClick?: () => void;
   children: ReactNode;
 }
 
 // CustomButton Component
-const CustomButton: FC<CustomButtonProps> = ({ children }) => {
+const CustomButton: FC<CustomButtonProps> = ({ onClick,children }) => {
   const theme = useTheme(); // Access the current theme
 
   const isDarkMode = theme.palette.mode === "dark";
   return (
     <button
+    onClick={onClick}
       className={`${
         !isDarkMode
           ? "text-[#061C2B] border-[#061C2B] hover:text-white hover:bg-[#061C2B]"

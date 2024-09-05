@@ -1,15 +1,15 @@
+import  { useState } from 'react';
 import { Box, Grid } from '@mui/material';
+import Header from '../../../Shared/components/Header/Header';
 import CartDetails from './subcomponents/CartDetails';
 import CartCost from './subcomponents/CartCost';
-import Header from '../../../Shared/components/Header/Header';
 
 const Cart = () => {
-  // Example dynamic data for cart items
-  const cartItems = [
-    { name: 'Frozen yoghurt', quantity: 2, price: 3.5 },
-    { name: 'Ice cream sandwich', quantity: 1, price: 5.0 },
-    { name: 'Eclair', quantity: 3, price: 2.0 },
-  ];
+  const [subtotal, setSubtotal] = useState(0); // State to store the subtotal
+
+  const handleSubtotalChange = (newSubtotal: number) => {
+    setSubtotal(newSubtotal); // Update subtotal whenever it changes in CartDetails
+  };
 
   return (
     <>
@@ -19,15 +19,12 @@ const Cart = () => {
         <Header.Logo />
         <Header.Icons />
       </Header>
-      <Box 
-      sx={{ 
-          flexGrow: 1, 
-          my: '12rem', 
-          px :'2rem'
-        }}>
+      <Box sx={{ flexGrow: 1, my: '12rem', px: '2rem' }}>
         <Grid container spacing={2}>
-          <CartDetails cartItems={cartItems} />
-          <CartCost cartItems={cartItems} />
+          <CartDetails onSubtotalChange={handleSubtotalChange} /> {/* Pass the subtotal change handler */}
+          <Grid item xs={12} md={4}>
+            <CartCost subtotal={subtotal} /> {/* Pass the subtotal to CartCost */}
+          </Grid>
         </Grid>
       </Box>
     </>

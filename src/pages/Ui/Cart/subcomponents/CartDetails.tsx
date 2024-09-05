@@ -1,68 +1,85 @@
-import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Table, TableBody, TableCell, TableHead, TableRow, Grid, IconButton, useTheme, Stack } from '@mui/material';
+import { RootState } from '../../../../rtk/store'; // Adjust the path to your Redux store
+import { removeItem, increaseQuantity, decreaseQuantity } from '../../../../rtk/cart/CartSlice'; // Adjust the import paths
+import { FaTrashAlt } from 'react-icons/fa'; // Trash icon for remove button
+import { CiCircleMinus, CiCirclePlus } from 'react-icons/ci';
 
-const ProductDetails = () => {
-  const [quantity, setQuantity] = useState(1);
+interface CartDetailsProps {
+  onSubtotalChange: (subtotal: number) => void;
+}
 
-  const increaseQuantity = () => setQuantity(quantity + 1);
-  const decreaseQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
+const CartDetails: React.FC<CartDetailsProps> = ({ onSubtotalChange }) => {
+  const cartItems = useSelector((state: RootState) => state.cart.items); // Retrieve cart items from Redux store
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
 
-  const removeItem = () => {
-    // Logic to remove item from the list
+  // Calculate subtotal
+  const subtotal = cartItems.reduce((total, item) => total + item.quantity * item.book.price, 0);
+
+  // Call the onSubtotalChange prop to pass subtotal up to parent
+  onSubtotalChange(subtotal);
+
+  const handleIncreaseQuantity = (bookId: number) => {
+    dispatch(increaseQuantity(bookId)); // Action to increase quantity
+  };
+
+  const handleDecreaseQuantity = (bookId: number) => {
+    dispatch(decreaseQuantity(bookId)); // Action to decrease quantity
+  };
+
+  const handleRemoveItem = (bookId: number) => {
+    dispatch(removeItem(bookId)); // Action to remove item from the cart
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-4 bg-gradient-to-r from-purple-100 to-pink-100 rounded-lg shadow-lg">
-      <h2 className="text-xl font-semibold text-gray-700 mb-4">Products Details</h2>
-      <table className="min-w-full bg-transparent ">
-        <thead>
-          <tr>
-            <th className="py-2 px-4 border-b text-left text-gray-600">Num</th>
-            <th className="py-2 px-4 border-b text-left text-gray-600">Book</th>
-            <th className="py-2 px-4 border-b text-left text-gray-600">Amount</th>
-            <th className="py-2 px-4 border-b text-left text-gray-600">Cost</th>
-            <th className="py-2 px-4 border-b text-left text-gray-600">Subtotal</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="border-b">
-            <td className="py-2 px-4 text-gray-700">01.</td>
-            <td className="py-2 px-4 flex items-center space-x-4">
-              <img src="/assets/books/book.png" alt="My Book Cover" className="w-16 h-20" />
-              <p className="text-gray-700">My Book Cover Name</p>
-            </td>
-            <td className="py-2 px-4">
-              <div className="flex items-center">
-                <button 
-                  onClick={decreaseQuantity} 
-                  className="bg-purple-500 text-white px-3 py-1 rounded-l hover:bg-purple-600"
-                >
-                  -
-                </button>
-                <span className="px-4">{quantity}</span>
-                <button 
-                  onClick={increaseQuantity} 
-                  className="bg-purple-500 text-white px-3 py-1 rounded-r hover:bg-purple-600"
-                >
-                  +
-                </button>
-              </div>
-            </td>
-            <td className="py-2 px-4 text-gray-700">36 AED</td>
-            <td className="py-2 px-4 text-gray-700">{36 * quantity} AED</td>
-            <td className="py-2 px-4 text-center">
-              <button 
-                onClick={removeItem} 
-                className="text-red-500 text-xl hover:text-red-600"
-              >
-                &times;
-              </button>
-            </td>
-          </tr>
-          {/* Repeat above <tr> for more items */}
-        </tbody>
-      </table>
-    </div>
+    <Grid item xs={12} md={8}>
+      <Table
+        sx={{ background: 'linear-gradient(45deg, #FFE5E5, #F5FFFE)' }}
+        aria-label="cart items table"
+        className="shadow-2xl rounded-2xl w-full"
+      >
+        <TableHead>
+          <TableRow>
+            <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}}>Num</TableCell>
+            <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}}>Book</TableCell>
+            <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}} align="center">Amount</TableCell>
+            <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}} align="center">Cost&nbsp;(USD)</TableCell>
+            <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}} align="center">Subtotal&nbsp;(USD)</TableCell>
+            <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}} align="center">Actions</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {cartItems.map((item, index) => (
+            <TableRow key={item.book.id}>
+              <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}}>{index + 1}.</TableCell>
+              <TableCell>
+                <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center' }}>
+                  <img src={item.book.image || `/assets/books/book.png`} alt={item.book.name} style={{ width: '50px', marginRight: '10px' }} />
+                  <Stack sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}}>{item.book.title}</Stack>
+                </div>
+              </TableCell>
+              <TableCell align="center">
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
+                  <CiCircleMinus  onClick={() => handleDecreaseQuantity(item.book.id)} className={`text-2xl cursor-pointer text-[#ED553B]`}/>
+                 <Stack sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}}> {item.quantity}</Stack>
+                  <CiCirclePlus onClick={() => handleIncreaseQuantity(item.book.id)}  className='text-2xl cursor-pointer text-[#ED553B]'/>
+                </div>
+              </TableCell>
+              <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}} align="center">{item.book.price}$</TableCell>
+              <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}} align="center">{item.quantity * item.book.price}$</TableCell>
+              <TableCell sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}} align="center">
+                <IconButton sx={{color : isDarkMode ?'#ED553B': '#393280', fontWeight:'bold'}} onClick={() => handleRemoveItem(item.book.id)}>
+                  <FaTrashAlt />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Grid>
   );
 };
 
-export default ProductDetails;
+export default CartDetails;

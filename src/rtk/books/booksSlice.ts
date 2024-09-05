@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // src/rtk/books/booksSlice.ts
 
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
@@ -35,6 +36,7 @@ const booksSlice = createSlice({
       .addCase(fetchBooks.pending, (state) => {
         state.status = 'loading';
       })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       .addCase(fetchBooks.fulfilled, (state, action: PayloadAction<any[]>) => {
         state.status = 'succeeded';
         state.items = action.payload;

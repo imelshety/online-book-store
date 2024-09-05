@@ -8,6 +8,9 @@ export interface Book {
   price: number;
   description?: string;
   image?: string;
+  title: string;
+  cover: string;
+  
 }
 export interface imgListType {
   img1: string;
