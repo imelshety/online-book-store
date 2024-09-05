@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { Table, TableBody, TableCell, TableHead, TableRow, Grid, IconButton, useTheme, Stack } from '@mui/material';
 import { RootState } from '../../../../rtk/store'; // Adjust the path to your Redux store
-import { removeItem, increaseQuantity, decreaseQuantity } from '../../../../rtk/cart/CartSlice'; // Adjust the import paths
+import { removeItem, increaseQuantity, decreaseQuantity } from '../../../../rtk/cart/cartSlice'; // Adjust the import paths
 import { FaTrashAlt } from 'react-icons/fa'; // Trash icon for remove button
 import { CiCircleMinus, CiCirclePlus } from 'react-icons/ci';
 
