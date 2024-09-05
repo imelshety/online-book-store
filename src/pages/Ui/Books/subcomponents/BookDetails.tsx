@@ -7,7 +7,7 @@ import axios from 'axios';
 import CustomButton from '../../../../Shared/components/CustomButton';
 import { FaTentArrowTurnLeft } from 'react-icons/fa6';
 import Loading from '../../../../Shared/components/Loading';
-import { addItem } from '../../../../rtk/cart/CartSlice';
+import { addItem } from '../../../../rtk/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { Book } from '../../../../types';
 
