@@ -10,6 +10,7 @@ import Loading from '../../../../Shared/components/Loading';
 import { addItem } from '../../../../rtk/cart/cartSlice';
 import { useDispatch } from 'react-redux';
 import { Book } from '../../../../types';
+import Header from '../../../../Shared/components/Header/Header';
 
 const BookDetails: React.FC = () => {
   const dispatch = useDispatch();
@@ -75,7 +76,13 @@ const BookDetails: React.FC = () => {
 
   return (
     <>
-      <div className={`relative top-6 left-2 w-12 rounded-full flex justify-center items-center h-12 ${isDarkMode ? 'bg-[#ED553B]' : 'bg-[#061C2B]'}`}>
+    <Header>
+        <Header.HeaderTop />
+        <Header.Actions />
+        <Header.Logo />
+        <Header.Icons />
+      </Header>
+      <div className={`mt-12 relative top-6 left-2 w-12 rounded-full flex justify-center items-center h-12 ${isDarkMode ? 'bg-[#ED553B]' : 'bg-[#061C2B]'}`}>
         <Link to="/home/books" className={`${isDarkMode ? 'text-[#061C2B]' : 'text-[#ED553B]'}`}>
           <FaTentArrowTurnLeft className='text-2xl'/> 
         </Link>
@@ -87,7 +94,7 @@ const BookDetails: React.FC = () => {
           color: isDarkMode ? 'white' : 'black',
         }}
       >
-        <Stack direction={{ xs: 'column', sm: 'column', md: 'row' }} spacing={4} justifyContent='center' alignItems='center'>
+        <Stack direction={{ xs: 'column', sm: 'column', md: 'row' }} spacing={4} justifyContent='center' alignItems='center' mt={8}>
           <img
             src={book.image || '/assets/books/book.png'}
             alt={book.name}
